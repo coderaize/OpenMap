@@ -33,6 +33,9 @@
 			this.TxtRemainingMapsToBeDownloaded = new System.Windows.Forms.TextBox();
 			this.startDownloadingBtn = new System.Windows.Forms.Button();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.txtMaxDegreeOfParallelism = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// loadJsonBtn
@@ -78,11 +81,40 @@
 			this.textBox1.TabIndex = 5;
 			this.textBox1.Text = "https://tile.openstreetmap.de/{z}/{x}/{y}.png";
 			// 
+			// txtMaxDegreeOfParallelism
+			// 
+			this.txtMaxDegreeOfParallelism.Location = new System.Drawing.Point(393, 16);
+			this.txtMaxDegreeOfParallelism.Name = "txtMaxDegreeOfParallelism";
+			this.txtMaxDegreeOfParallelism.Size = new System.Drawing.Size(88, 27);
+			this.txtMaxDegreeOfParallelism.TabIndex = 6;
+			this.txtMaxDegreeOfParallelism.Text = "100";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(316, 20);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(71, 20);
+			this.label1.TabIndex = 7;
+			this.label1.Text = "Max DOP";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(520, 19);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(80, 20);
+			this.label2.TabIndex = 8;
+			this.label2.Text = "Remaining";
+			// 
 			// Downloader
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(703, 757);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.txtMaxDegreeOfParallelism);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.startDownloadingBtn);
 			this.Controls.Add(this.TxtRemainingMapsToBeDownloaded);
@@ -102,5 +134,8 @@
 		private TextBox TxtRemainingMapsToBeDownloaded;
 		private Button startDownloadingBtn;
 		private TextBox textBox1;
+		private TextBox txtMaxDegreeOfParallelism;
+		private Label label1;
+		private Label label2;
 	}
 }
