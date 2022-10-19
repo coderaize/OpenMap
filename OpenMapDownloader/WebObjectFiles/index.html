@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+      integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <style>
+      #map {
+        height: 380px;
+      }
+    </style>
+    <div id="map"></div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+      integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+      crossorigin=""
+    ></script>
+    <script src="https://cdn.rawgit.com/aparshin/leaflet-boundary-canvas/f00b4d35/src/BoundaryCanvas.js"></script>
+    <script src="leafletExporter.js"></script>
+
+    <script>
+      function getTileUrls(bounds, tileLayer, zoom) {
+        var min = map.project(bounds[0], zoom).divideBy(256).floor(),
+          max = map.project(bounds[1], zoom).divideBy(256).floor(),
+          urls = [];
+
+        for (var i = min.x; i <= max.x; i++) {
+          for (var j = min.y; j <= max.y; j++) {
+            var coords = new L.Point(i, j);
+            coords.z = zoom;
+            urls.push(tileLayer.getTileUrl(coords));
+          }
+        }
+
+        return urls;
+      }
+    </script>
+
+    <script>
+      var map = L.map("map").setView([51.505, -0.09], 13);
+
+      $.getJSON(
+        "https://cdn.jsdelivr.net/gh/johan/world.geo.json@34c96bba/countries/PAK.geo.json"
+      ).then(function (geoJSON) {
+        var osm = new L.TileLayer.BoundaryCanvas(
+          "https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png",
+          {
+            boundary: geoJSON,
+            attribution: "",
+          }
+        );
+        map.addLayer(osm);
+        var ukLayer = L.geoJSON(geoJSON);
+        map.fitBounds(ukLayer.getBounds());
+        // Danish ust change the number below. Bhai! From 1 to 13
+        var urls = xyz(bounds, 13);
+        console.log(urls);
+      });
+
+      var bounds = [
+        [
+          60.644524, //minimum longitude (west)
+          23.644524, //minimum latitude (south)
+        ],
+        [
+          77.080078, //maximum longitude (east)
+          37.07271, //maximum latitude (north)
+        ],
+      ];
+    </script>
+  </body>
+</html>
